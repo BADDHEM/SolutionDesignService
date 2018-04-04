@@ -9,8 +9,8 @@ pipeline {
 		
 		stage('BUILD') {
             steps {
-			GRADLE_HOME = env.GRADLE_HOME	
-            bat 'gradlew clean build'
+			
+            bat './gradlew clean build'
             }
         }
     }
