@@ -9,7 +9,8 @@ pipeline {
 		
 		stage('BUILD') {
             steps {
-                bat 'gradlew clean build'
+			GRADLE_HOME	C:\gradle-3.1
+            bat 'gradlew clean build'
             }
         }
     }
