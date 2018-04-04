@@ -8,11 +8,18 @@ pipeline{
    stages{
    
       stage('Checkout'){
-	      checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/BADDHEM/SolutionDesignService.git']]])
+	  
+	  steps {
+              checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/BADDHEM/SolutionDesignService.git']]])
+
+            }
 	  }
    
      stage('Gradle Build') {
-        bat 'gradlew.bat clean build'
+	    steps{
+		   bat 'gradlew.bat clean build'
+		}
+        
     }
    }
 
