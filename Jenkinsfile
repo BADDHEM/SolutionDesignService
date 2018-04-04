@@ -1,27 +1,18 @@
-pipeline{
-   agent{
-      node{
-	     label 'Build Node1'
-	  }
+pipeline {
+   agent any
+   stage('Checkout') { 
+     steps{
+      git https://BADDHEM@github.com/BADDHEM/SolutionDesignService.git
+       } 
+      
    }
-   
-   stages{
-   
-      stage('Checkout'){
-	  
-	  steps {
-              checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/BADDHEM/SolutionDesignService.git']]])
-
-            }
-	  }
-   
-     stage('Gradle Build') {
-	    steps{
-		   bat 'gradlew.bat clean build'
-		}
+   stage('Build') {
+      // Run the maven build
+    steps{
+	 bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+	}
         
-    }
+      
    }
-
-
+  
 }
