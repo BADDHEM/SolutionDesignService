@@ -15,7 +15,7 @@ public class DockerRest {
     }
  
     @RequestMapping("/hello/{player}")
-    public Message message(@PathVariable String player) {//REST Endpoint.
+    public String message(@PathVariable String player) {//REST Endpoint.
 	
              return "Welcome to RestTemplate Venki.";
         
