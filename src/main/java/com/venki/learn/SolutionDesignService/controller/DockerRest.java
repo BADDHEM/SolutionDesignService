@@ -1,4 +1,4 @@
-package com.venki.learn.SolutionDesignService.controller
+package com.venki.learn.SolutionDesignService.controller;
  
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
