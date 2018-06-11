@@ -4,9 +4,16 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		maven {
+        url  "http://dl.bintray.com/nilsmagnus/maven"
+       }
 	}
+	
+	
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'no.nils:wsdl2java:0.10'
+		
 	}
 }
 
@@ -14,6 +21,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin :'no.nils.wsdl2java'
 
 group = 'com.venki.learn'
 version = '0.0.1-SNAPSHOT'
@@ -39,4 +47,19 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile('org.springframework.boot:spring-boot-starter-data-rest:2.0.0.RELEASE')
+	compile('org.apache.cxf:cxf-rt-frontend-jaxws:3.2.4')
+	compile('org.springframework.boot:spring-boot-starter-web-services')
+}
+
+wsdl2java{
+    wsdlsToGenerate = [
+            ['-p','com.acme.mypackage', '-autoNameResolution',"$projectDir/src/main/resources/why.wsdl"]
+    ]
+    generatedWsdlDir = file("$projectDir/generatedsources")
+    wsdlDir = file("$projectDir/src/main/resources")
+    locale = Locale.US
+}
+
+wsdl2javaExt {
+    deleteGeneratedSourcesOnClean = true
 }
